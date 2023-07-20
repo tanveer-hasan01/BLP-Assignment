@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".DetailsActivity">
 
-    <include layout="@layout/my_toobar"/>
+    <include
+        android:id="@+id/toobar"
+        layout="@layout/my_toobar" />
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

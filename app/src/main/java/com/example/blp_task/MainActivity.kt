@@ -7,32 +7,33 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blp_task.adapter.CategoryAdapter
 import com.example.blp_task.adapter.SliderAdapter
+import com.example.blp_task.databinding.ActivityDetailsBinding
+import com.example.blp_task.databinding.ActivityMainBinding
 import com.example.blp_task.dataclass.Category
 import com.smarteist.autoimageslider.SliderView
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var mytoolbar:androidx.appcompat.widget.Toolbar
+
+    lateinit var binding: ActivityMainBinding
     lateinit var imageurl:ArrayList<String>
-    lateinit var recyclerView: RecyclerView
     private lateinit var categoryList:ArrayList<Category>
-    lateinit var sliderView:SliderView
     lateinit var sliderAdapter: SliderAdapter
     lateinit var categoryAdapter:CategoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
         //custom tool bar
-        sliderView=findViewById(R.id.imageSlider)
-        mytoolbar=findViewById(R.id.my_toolbar)
-        setSupportActionBar(mytoolbar)
+
+        setSupportActionBar(binding.toobar.myToolbar)
 
 
         //card recyclerView
-        recyclerView=findViewById(R.id.recyclerView)
-        recyclerView.layoutManager=GridLayoutManager(this,3)
+
+        binding.recyclerView.layoutManager=GridLayoutManager(this,3)
         categoryList= ArrayList()
         categoryList.add(Category(R.drawable.product,"Product Brief","#62CEF9" ))
         categoryList.add(Category(R.drawable.memo,"Memo/Circular","#4AC989"))
@@ -44,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         categoryList.add(Category(R.drawable.cycleplan,"Cycle Plan","#4AC989"))
         categoryList.add(Category(R.drawable.notice,"Notice","#A28EEC"))
         categoryAdapter= CategoryAdapter(categoryList)
-        recyclerView.adapter=categoryAdapter
+        binding.recyclerView.adapter=categoryAdapter
 
 
         categoryAdapter.OnItemClick={
@@ -60,10 +61,10 @@ class MainActivity : AppCompatActivity() {
         imageurl.add("https://media.nj.com/hunterdon-photos/photo/2016/04/21/-65feed4236d453a7.jpg")
         imageurl.add("https://tds-images.thedailystar.net/sites/default/files/styles/very_big_201/public/feature/images/2021/01/10/quality.jpg")
         sliderAdapter= SliderAdapter(imageurl)
-        sliderView.autoCycleDirection= SliderView.LAYOUT_DIRECTION_LTR
-        sliderView.setSliderAdapter(sliderAdapter)
-        sliderView.isAutoCycle=true
-        sliderView.startAutoCycle()
-        sliderView.scrollTimeInSec=3
+        binding.imageSlider.autoCycleDirection= SliderView.LAYOUT_DIRECTION_LTR
+        binding.imageSlider.setSliderAdapter(sliderAdapter)
+        binding.imageSlider.isAutoCycle=true
+        binding.imageSlider.startAutoCycle()
+        binding.imageSlider.scrollTimeInSec=3
     }
 }
