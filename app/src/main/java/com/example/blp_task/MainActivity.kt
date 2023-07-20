@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
         //custom tool bar
         sliderView=findViewById(R.id.imageSlider)
         mytoolbar=findViewById(R.id.my_toolbar)
+
         setSupportActionBar(mytoolbar)
 
 
