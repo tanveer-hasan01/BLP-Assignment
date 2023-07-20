@@ -1,12 +1,12 @@
 package com.example.blp_task
 
-import android.graphics.Color
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toolbar
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.blp_task.adapter.CategoryAdapter
+import com.example.blp_task.adapter.SliderAdapter
 import com.example.blp_task.dataclass.Category
 import com.smarteist.autoimageslider.SliderView
 
@@ -17,7 +17,7 @@ class MainActivity : AppCompatActivity() {
     lateinit var recyclerView: RecyclerView
     private lateinit var categoryList:ArrayList<Category>
     lateinit var sliderView:SliderView
-    lateinit var sliderAdapter:SliderAdapter
+    lateinit var sliderAdapter: SliderAdapter
     lateinit var categoryAdapter:CategoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity() {
         //custom tool bar
         sliderView=findViewById(R.id.imageSlider)
         mytoolbar=findViewById(R.id.my_toolbar)
-
         setSupportActionBar(mytoolbar)
 
 
@@ -47,6 +46,12 @@ class MainActivity : AppCompatActivity() {
         categoryAdapter= CategoryAdapter(categoryList)
         recyclerView.adapter=categoryAdapter
 
+
+        categoryAdapter.OnItemClick={
+            val intent= Intent(this, DetailsActivity::class.java)
+            intent.putExtra("category",it.title)
+            startActivity(intent)
+        }
 
 
         //slider image

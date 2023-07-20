@@ -5,6 +5,7 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView.OnItemClickListener
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.cardview.widget.CardView
@@ -16,6 +17,7 @@ class CategoryAdapter(private val categoryList:ArrayList<Category>)
     : RecyclerView.Adapter<CategoryAdapter.CategoryHolder>() {
 
 
+    var OnItemClick: ((Category) -> Unit)?=null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryHolder {
        val view=LayoutInflater.from(parent.context).inflate(R.layout.item_card_category,parent,false)
@@ -34,6 +36,10 @@ class CategoryAdapter(private val categoryList:ArrayList<Category>)
         holder.imageView.setImageResource(category.image)
         holder.title.text = category.title
         holder.cardView.setCardBackgroundColor(Color.parseColor(category.color))
+
+        holder.itemView.setOnClickListener {
+            OnItemClick?.invoke(category)
+        }
 
     }
 

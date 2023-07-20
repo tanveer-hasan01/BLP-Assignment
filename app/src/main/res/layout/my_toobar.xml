@@ -13,21 +13,20 @@
         android:layout_height="60dp">
 
 
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Hi, Rakib Hasan"
+            android:textColor="#1D3A62"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/back"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:textSize="16sp"
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="#1D3A62"
-        android:text="Hi, Rakib Hasan"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.507" />
-
-    <ImageView
+        <ImageView
         android:id="@+id/notification"
         android:layout_width="48dp"
         android:layout_height="34dp"
@@ -45,5 +44,15 @@
             app:layout_constraintEnd_toEndOf="@+id/notification"
             app:layout_constraintTop_toTopOf="@+id/notification"
             app:srcCompat="@drawable/red_circle" />
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/back"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/back" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.appcompat.widget.Toolbar>
