@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/my_toolbar"
+    android:background="#F2F6FE"
+    android:layout_height="60dp">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp">
+
+
+
+    <TextView
+        android:textSize="16sp"
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="#1D3A62"
+        android:text="Hi, Rakib Hasan"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.507" />
+
+    <ImageView
+        android:id="@+id/notification"
+        android:layout_width="48dp"
+        android:layout_height="34dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/notification" />
+
+        <ImageView
+            android:id="@+id/imageView2"
+            android:layout_width="15dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="@+id/notification"
+            app:layout_constraintTop_toTopOf="@+id/notification"
+            app:srcCompat="@drawable/red_circle" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.appcompat.widget.Toolbar>
