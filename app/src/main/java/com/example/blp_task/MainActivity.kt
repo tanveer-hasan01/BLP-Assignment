@@ -27,9 +27,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //custom tool bar
-
         setSupportActionBar(binding.toobar.myToolbar)
+        binding.toobar.notification.setOnClickListener {
 
+        }
 
         //card recyclerView
 

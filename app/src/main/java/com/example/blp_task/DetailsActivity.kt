@@ -34,8 +34,11 @@ class DetailsActivity : AppCompatActivity() {
         binding.toobar.title.text=intent.getStringExtra("category")
         binding.toobar.back.setOnClickListener { onBackPressedDispatcher.onBackPressed() }
         binding.toobar.notification.setOnClickListener {
-            Toast.makeText(this,"dfsdf",Toast.LENGTH_LONG).show()
+            Toast.makeText(this,"Not Implemented..",Toast.LENGTH_LONG).show()
         }
+
+        binding.cardView.setBackgroundResource(R.drawable.sergel);
+
 
     }
 }
