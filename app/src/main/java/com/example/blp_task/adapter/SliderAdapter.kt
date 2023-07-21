@@ -6,12 +6,13 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.example.blp_task.R
+import com.example.blp_task.dataclass.SliderItem
 import com.smarteist.autoimageslider.SliderViewAdapter
 
-class SliderAdapter (imageurl:ArrayList<String>):
+class SliderAdapter (imageurl:ArrayList<SliderItem>):
     SliderViewAdapter<SliderAdapter.Holder>()  {
 
-    var sliderImage: ArrayList<String> =imageurl
+    var sliderImage: ArrayList<SliderItem> =imageurl
 
 
 
@@ -27,7 +28,7 @@ class SliderAdapter (imageurl:ArrayList<String>):
     override fun onBindViewHolder(viewHolder: Holder?, position: Int) {
         if (viewHolder!=null)
             Glide.with(viewHolder.itemView)
-                .load(sliderImage.get(position)).fitCenter()
+                .load(sliderImage.get(position).url).fitCenter()
                 .into(viewHolder.imageView)
 
     }

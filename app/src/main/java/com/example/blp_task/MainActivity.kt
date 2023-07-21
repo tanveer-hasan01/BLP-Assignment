@@ -10,13 +10,20 @@ import com.example.blp_task.adapter.SliderAdapter
 import com.example.blp_task.databinding.ActivityDetailsBinding
 import com.example.blp_task.databinding.ActivityMainBinding
 import com.example.blp_task.dataclass.Category
+import com.example.blp_task.dataclass.SliderItem
+import com.example.blp_task.network.ApiInterface
+import com.example.blp_task.network.RetrofitInstance
+import com.google.android.material.snackbar.Snackbar
 import com.smarteist.autoimageslider.SliderView
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class MainActivity : AppCompatActivity() {
 
 
     lateinit var binding: ActivityMainBinding
-    lateinit var imageurl:ArrayList<String>
+    lateinit var imageurl:ArrayList<SliderItem>
     private lateinit var categoryList:ArrayList<Category>
     lateinit var sliderAdapter: SliderAdapter
     lateinit var categoryAdapter:CategoryAdapter
@@ -57,15 +64,36 @@ class MainActivity : AppCompatActivity() {
 
 
         //slider image
+        getSliderImage()
+
+    }
+
+    private fun getSliderImage(){
+
         imageurl=ArrayList()
-        imageurl.add("https://media.licdn.com/dms/image/C4D12AQEItqyuVjmQgg/article-cover_image-shrink_720_1280/0/1589412461241?e=2147483647&v=beta&t=ZY13S8Sk8G3Sunb6eYrT3jZGP2sv53Bxl0Ezk-Ws6yA")
-        imageurl.add("https://media.nj.com/hunterdon-photos/photo/2016/04/21/-65feed4236d453a7.jpg")
-        imageurl.add("https://tds-images.thedailystar.net/sites/default/files/styles/very_big_201/public/feature/images/2021/01/10/quality.jpg")
-        sliderAdapter= SliderAdapter(imageurl)
-        binding.imageSlider.autoCycleDirection= SliderView.LAYOUT_DIRECTION_LTR
-        binding.imageSlider.setSliderAdapter(sliderAdapter)
-        binding.imageSlider.isAutoCycle=true
-        binding.imageSlider.startAutoCycle()
-        binding.imageSlider.scrollTimeInSec=3
+
+        val medApi = RetrofitInstance.getInstance().create(ApiInterface::class.java)
+        medApi.getSliderImage().enqueue(object : Callback<List<SliderItem>?> {
+            override fun onResponse(
+                call: Call<List<SliderItem>?>,
+                response: Response<List<SliderItem>?>
+            ) {
+                val responseBody = response.body()
+                imageurl.addAll(responseBody!!)
+                sliderAdapter= SliderAdapter(imageurl)
+                binding.imageSlider.autoCycleDirection= SliderView.LAYOUT_DIRECTION_LTR
+                binding.imageSlider.setSliderAdapter(sliderAdapter)
+                binding.imageSlider.isAutoCycle=true
+                binding.imageSlider.startAutoCycle()
+                binding.imageSlider.scrollTimeInSec=3
+
+            }
+
+            override fun onFailure(call: Call<List<SliderItem>?>, t: Throwable) {
+                Snackbar.make(binding.root, "Data not found", Snackbar.LENGTH_SHORT).show()
+            }
+        })
+
+
     }
 }
