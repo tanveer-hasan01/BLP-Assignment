@@ -23,10 +23,10 @@ class MainActivity : AppCompatActivity() {
 
 
     lateinit var binding: ActivityMainBinding
-    lateinit var imageurl:ArrayList<SliderItem>
-    private lateinit var categoryList:ArrayList<Category>
+    lateinit var imageurl: ArrayList<SliderItem>
+    private lateinit var categoryList: ArrayList<Category>
     lateinit var sliderAdapter: SliderAdapter
-    lateinit var categoryAdapter:CategoryAdapter
+    lateinit var categoryAdapter: CategoryAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,25 +41,34 @@ class MainActivity : AppCompatActivity() {
 
         //card recyclerView
 
-        binding.recyclerView.layoutManager=GridLayoutManager(this,3)
-        categoryList= ArrayList()
-        categoryList.add(Category(R.drawable.product,"Product Brief","#62CEF9" ))
-        categoryList.add(Category(R.drawable.memo,"Memo/Circular","#4AC989"))
-        categoryList.add(Category(R.drawable.wpm,"Digital WPM","#A28EEC"))
-        categoryList.add(Category(R.drawable.servay,"Survey","#FF7070"))
-        categoryList.add(Category(R.drawable.quiz,"Exam/Quiz","#ECAC4A"))
-        categoryList.add(Category(R.drawable.campaign,"Campaign","#FB80BA"))
-        categoryList.add(Category(R.drawable.feedback,"Feedback","#62CEF9"))
-        categoryList.add(Category(R.drawable.cycleplan,"Cycle Plan","#4AC989"))
-        categoryList.add(Category(R.drawable.notice,"Notice","#A28EEC"))
-        categoryAdapter= CategoryAdapter(categoryList)
-        binding.recyclerView.adapter=categoryAdapter
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 3)
+        categoryList = ArrayList()
+        categoryList.add(Category(R.drawable.product, "Product Brief", "#62CEF9"))
+        categoryList.add(Category(R.drawable.memo, "Memo/Circular", "#4AC989"))
+        categoryList.add(Category(R.drawable.wpm, "Digital WPM", "#A28EEC"))
+        categoryList.add(Category(R.drawable.servay, "Survey", "#FF7070"))
+        categoryList.add(Category(R.drawable.quiz, "Exam/Quiz", "#ECAC4A"))
+        categoryList.add(Category(R.drawable.campaign, "Campaign", "#FB80BA"))
+        categoryList.add(Category(R.drawable.feedback, "Feedback", "#62CEF9"))
+        categoryList.add(Category(R.drawable.cycleplan, "Cycle Plan", "#4AC989"))
+        categoryList.add(Category(R.drawable.notice, "Notice", "#A28EEC"))
+        categoryAdapter = CategoryAdapter(categoryList)
+        binding.recyclerView.adapter = categoryAdapter
 
 
-        categoryAdapter.OnItemClick={
-            val intent= Intent(this, DetailsActivity::class.java)
-            intent.putExtra("category",it.title)
-            startActivity(intent)
+        categoryAdapter.OnItemClick = {
+            if (it.title == "Product Brief") {
+                val intent = Intent(this, DetailsActivity::class.java)
+                intent.putExtra("category", it.title)
+                startActivity(intent)
+            } else {
+                Snackbar.make(
+                    binding.root,
+                    it.title + " is not implement yet",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+            }
+
         }
 
 
@@ -68,9 +77,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun getSliderImage(){
+    private fun getSliderImage() {
 
-        imageurl=ArrayList()
+        imageurl = ArrayList()
 
         val medApi = RetrofitInstance.getInstance().create(ApiInterface::class.java)
         medApi.getSliderImage().enqueue(object : Callback<List<SliderItem>?> {
@@ -80,12 +89,12 @@ class MainActivity : AppCompatActivity() {
             ) {
                 val responseBody = response.body()
                 imageurl.addAll(responseBody!!)
-                sliderAdapter= SliderAdapter(imageurl)
-                binding.imageSlider.autoCycleDirection= SliderView.LAYOUT_DIRECTION_LTR
+                sliderAdapter = SliderAdapter(imageurl)
+                binding.imageSlider.autoCycleDirection = SliderView.LAYOUT_DIRECTION_LTR
                 binding.imageSlider.setSliderAdapter(sliderAdapter)
-                binding.imageSlider.isAutoCycle=true
+                binding.imageSlider.isAutoCycle = true
                 binding.imageSlider.startAutoCycle()
-                binding.imageSlider.scrollTimeInSec=3
+                binding.imageSlider.scrollTimeInSec = 3
 
             }
 
