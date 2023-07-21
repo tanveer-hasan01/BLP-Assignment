@@ -24,7 +24,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toobar" />
 
-    <EditText
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/search_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -33,7 +33,7 @@
         android:background="@drawable/search"
         android:drawableLeft="@drawable/ic_search"
         android:ems="10"
-        android:hint=" Search here..."
+        app:queryHint="Search here..."
         android:inputType="text"
         android:paddingLeft="8dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,16 +64,15 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/product_recycler"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:listitem="@layout/item_recyclerview"
+        android:layout_height="match_parent"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="320dp"
         android:layout_marginEnd="8dp"
         android:paddingBottom="8dp"
-        android:layout_marginBottom="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/search_text" />
+        app:layout_constraintTop_toBottomOf="@+id/search_text"
+        tools:listitem="@layout/item_recyclerview" />
 
     <ProgressBar
         android:id="@+id/progressBar"

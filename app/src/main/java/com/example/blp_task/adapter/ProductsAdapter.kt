@@ -8,11 +8,19 @@ import com.bumptech.glide.Glide
 import com.example.blp_task.databinding.ItemRecyclerviewBinding
 import com.example.blp_task.dataclass.ProductsItem
 
-class ProductsAdapter(val context: Context,val productList: List<ProductsItem>): RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
+class ProductsAdapter(val context: Context, var productList: List<ProductsItem>): RecyclerView.Adapter<ProductsAdapter.ViewHolder>() {
 
 
     inner class ViewHolder(val binding: ItemRecyclerviewBinding)
         :RecyclerView.ViewHolder(binding.root)
+
+
+    fun setFilterList(mList: List<ProductsItem>){
+
+        this.productList=mList
+        notifyDataSetChanged()
+    }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProductsAdapter.ViewHolder {
         val binding = ItemRecyclerviewBinding
